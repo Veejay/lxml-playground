@@ -2,19 +2,17 @@ import lxml
 from lxml import etree
 from io import StringIO
 
-markup = '''
-    <html>
-        <head>
-        </head>
-        <body>
-            <p class="acme">
-                Hello!
-            </p>
-        </body>
-    </html>
-'''
+
+file = open("./sample.html", "r")
+markup = file.read()
 
 parser = etree.HTMLParser()
 tree = etree.parse(StringIO(markup), parser)
-paragraph = tree.find(".//p")
-print(paragraph.attrib["class"])
+print(tree)
+
+root = tree.getroot()
+
+paragraphs = root.findall('.//p')
+
+for paragraph in paragraphs:
+    print(paragraph.findtext("strong"))
