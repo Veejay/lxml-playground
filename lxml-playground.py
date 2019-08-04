@@ -15,4 +15,7 @@ root = tree.getroot()
 paragraphs = root.findall('.//p')
 
 for paragraph in paragraphs:
-    print(paragraph.findtext("strong"))
+    paragraph.set("data-foo", "bang")
+
+tree = etree.ElementTree(root)
+tree.write("result.html")
